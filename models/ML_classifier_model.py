@@ -2,7 +2,8 @@
 # License: BSD 3 clause
 import pickle
 import sys
-sys.path.append('..')
+
+sys.path.append("..")
 
 import numpy as np
 
@@ -10,16 +11,16 @@ from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 
 
-
 class CustomMLmodel:
-    def __init__(self,model):
+    def __init__(self, model):
         self._model = model
 
-    def fit(self,X,y):
-        self._model.fit(X,y)
+    def fit(self, X, y):
+        self._model.fit(X, y)
 
-    def predict(self,X):
+    def predict(self, X):
         return self._model.predict(X)
+
 
 if __name__ == "__main__":
     # Load the diabetes dataset
@@ -48,18 +49,24 @@ if __name__ == "__main__":
     # The coefficients
     print("Coefficients: \n", model1._model.coef_)
     # The mean squared error
-    print("Mean squared error: %.2f" % mean_squared_error(diabetes_y_test, diabetes_y_pred))
+    print(
+        "Mean squared error: %.2f"
+        % mean_squared_error(diabetes_y_test, diabetes_y_pred)
+    )
     # The coefficient of determination: 1 is perfect prediction
-    print("Coefficient of determination: %.2f" % r2_score(diabetes_y_test, diabetes_y_pred))
+    print(
+        "Coefficient of determination: %.2f"
+        % r2_score(diabetes_y_test, diabetes_y_pred)
+    )
 
-    with open('./assets/model1.pickle','wb') as file:
-        pickle.dump(model1,file)
+    with open("./assets/model1.pickle", "wb") as file:
+        pickle.dump(model1, file)
 
     # Create linear regression object
     model2 = CustomMLmodel(model=linear_model.HuberRegressor())
 
     # Train the model using the training sets
-    print("Diabetes shape:",diabetes_X_train.shape)
+    print("Diabetes shape:", diabetes_X_train.shape)
     model2.fit(diabetes_X_train, diabetes_y_train)
 
     # Make predictions using the testing set
@@ -68,9 +75,15 @@ if __name__ == "__main__":
     # The coefficients
     print("Coefficients: \n", model2._model.coef_)
     # The mean squared error
-    print("Mean squared error: %.2f" % mean_squared_error(diabetes_y_test, diabetes_y_pred))
+    print(
+        "Mean squared error: %.2f"
+        % mean_squared_error(diabetes_y_test, diabetes_y_pred)
+    )
     # The coefficient of determination: 1 is perfect prediction
-    print("Coefficient of determination: %.2f" % r2_score(diabetes_y_test, diabetes_y_pred))
+    print(
+        "Coefficient of determination: %.2f"
+        % r2_score(diabetes_y_test, diabetes_y_pred)
+    )
 
-    with open('./assets/model2.pickle','wb') as file:
-        pickle.dump(model2,file)
+    with open("./assets/model2.pickle", "wb") as file:
+        pickle.dump(model2, file)
